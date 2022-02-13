@@ -1,6 +1,9 @@
 # SnatchRunner
  PatikaDev Final project
 
-![SnatchRunner3](https://user-images.githubusercontent.com/52819477/153767793-43837ca8-3532-4cd4-8918-b9d93a596a04.PNG)
-![SnatchRunner1](https://user-images.githubusercontent.com/52819477/153767794-e873598b-a6fc-4378-b315-7c166000f7bc.PNG)
-![SnacthRunner2](https://user-images.githubusercontent.com/52819477/153767795-80a047a0-e428-4d69-86fd-8fa4c4a65170.PNG)
+
+![SnatchRunner6](https://user-images.githubusercontent.com/52819477/153777044-a096317a-d6de-4094-a671-fcbe6d806a03.PNG)
+
+![SnatchRunner4](https://user-images.githubusercontent.com/52819477/153777045-83de42d0-e55c-4a9f-a60f-666a1c5b504c.PNG)
+
+![SnatchRunner5](https://user-images.githubusercontent.com/52819477/153777046-32c32ed9-d5c8-48f3-9a7f-fefbbcbc596a.PNG)
