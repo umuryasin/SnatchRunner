@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour
@@ -8,6 +9,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Canvas GameMenu;
     [SerializeField] private Canvas LoseMenu;
     [SerializeField] private Canvas WinMenu;
+
+    [SerializeField] private TextMeshProUGUI txtScoreGame;
+    [SerializeField] private TextMeshProUGUI txtScoreLose;
+    [SerializeField] private TextMeshProUGUI txtScoreWin;
+
     //[SerializeField] private GameObject EngGameMenuSuccess;
     //[SerializeField] private GameObject EngGameMenuFail;
 
@@ -25,27 +31,6 @@ public class MenuManager : MonoBehaviour
         // Unsubscribe to the event
         GameManager.onGameStateChanged -= GameManager_onGameStateChanged;
     }
-
-    //void Awake()
-    //{
-    //    if (instance != null)
-    //    {
-    //        Destroy(gameObject);
-    //        //Destroy(MainMenu.gameObject);
-    //        //Destroy(GameMenu.gameObject);
-    //        //Destroy(LoseMenu.gameObject);
-    //        //Destroy(WinMenu.gameObject);
-    //    }
-    //    else
-    //    {
-    //        instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //        //DontDestroyOnLoad(MainMenu.gameObject);
-    //        //DontDestroyOnLoad(GameMenu.gameObject);
-    //        //DontDestroyOnLoad(LoseMenu.gameObject);
-    //        //DontDestroyOnLoad(WinMenu.gameObject);
-    //    }
-    //}
 
     private void GameManager_onGameStateChanged(GameStates GameState)
     {
@@ -68,6 +53,14 @@ public class MenuManager : MonoBehaviour
         else if (GameState == GameStates.WinGame)
         {
             WinGameMenu();
+        } 
+        else if (GameState == GameStates.ScoreUp)
+        {
+            int score = SkorManager.Instance.GetScore();
+
+            txtScoreGame.text = score.ToString();
+            txtScoreWin.text = score.ToString();
+            txtScoreLose.text = score.ToString();
         }
     }
 

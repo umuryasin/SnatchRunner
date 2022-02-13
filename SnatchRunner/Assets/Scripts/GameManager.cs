@@ -65,7 +65,13 @@ public class GameManager : MonoBehaviour
         EditorSceneManager.LoadScene(EditorSceneManager.GetActiveScene().buildIndex, UnityEngine.SceneManagement.LoadSceneMode.Single);
         updateGameState(GameStates.RestartGame);
     }
-    
+
+    public void NextLevel()
+    {
+        EditorSceneManager.LoadScene("SampleScene2", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        updateGameState(GameStates.NextLevel);
+    }
+
     public void ScoreUp()
     {
         updateGameState(GameStates.ScoreUp);

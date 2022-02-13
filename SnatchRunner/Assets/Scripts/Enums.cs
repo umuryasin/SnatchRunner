@@ -14,4 +14,5 @@ public enum GameStates
     ScoreUp,
     LoseGame,
     WinGame,
+    NextLevel,
 };
