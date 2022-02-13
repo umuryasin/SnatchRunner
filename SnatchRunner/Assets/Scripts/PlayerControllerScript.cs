@@ -25,10 +25,21 @@ public class PlayerControllerScript : MonoBehaviour
     private float AbsoluteForwardMovementSpeed;
     private Animator GameObjectAnimator;
 
+    void OnEnable()
+    {
+        // Subscribe to the event
+        GameManager.onGameStateChanged += GameManager_onGameStateChanged;
+    }
+
+    void OnDisable()
+    {
+        // Unsubscribe to the event
+        GameManager.onGameStateChanged -= GameManager_onGameStateChanged;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.onGameStateChanged += GameManager_onGameStateChanged;
         GameObjectAnimator =  PlayerObject.GetComponent<Animator>();
         AbsoluteForwardMovementSpeed = forwardMovementSpeed;
     }

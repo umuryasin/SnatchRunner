@@ -26,10 +26,22 @@ public class PoliceScript : MonoBehaviour
     private float sumErrX = 0;
     private float sumErrZ = 0;
 
+    void OnEnable()
+    {
+        // Subscribe to the event
+        GameManager.onGameStateChanged += GameManager_onGameStateChanged;
+    }
+
+    void OnDisable()
+    {
+        // Unsubscribe to the event
+        GameManager.onGameStateChanged -= GameManager_onGameStateChanged;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.onGameStateChanged += GameManager_onGameStateChanged;
+        
 
         rigidbody = GetComponent<Rigidbody>();
     }

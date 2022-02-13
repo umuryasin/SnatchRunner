@@ -4,36 +4,48 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private Canvas ParentCanvas;
-    [SerializeField] private GameObject MainMenu;
-    [SerializeField] private GameObject GameMenu;
-    [SerializeField] private GameObject LoseMenu;
-    [SerializeField] private GameObject WinMenu;
+    [SerializeField] private Canvas MainMenu;
+    [SerializeField] private Canvas GameMenu;
+    [SerializeField] private Canvas LoseMenu;
+    [SerializeField] private Canvas WinMenu;
     //[SerializeField] private GameObject EngGameMenuSuccess;
     //[SerializeField] private GameObject EngGameMenuFail;
 
-    private static MenuManager instance;
-    public static MenuManager Instance => instance ?? (instance = FindObjectOfType<MenuManager>());
+    //private static MenuManager instance;
+    //public static MenuManager Instance => instance ?? (instance = FindObjectOfType<MenuManager>());
 
-    void Awake()
+    void OnEnable()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            //Destroy(MainMenu);
-            //Destroy(GameMenu);
-            //Destroy(LoseMenu);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            //DontDestroyOnLoad(ParentCanvas.gameObject);
-        }
-
-
+        // Subscribe to the event
         GameManager.onGameStateChanged += GameManager_onGameStateChanged;
     }
+
+    void OnDisable()
+    {
+        // Unsubscribe to the event
+        GameManager.onGameStateChanged -= GameManager_onGameStateChanged;
+    }
+
+    //void Awake()
+    //{
+    //    if (instance != null)
+    //    {
+    //        Destroy(gameObject);
+    //        //Destroy(MainMenu.gameObject);
+    //        //Destroy(GameMenu.gameObject);
+    //        //Destroy(LoseMenu.gameObject);
+    //        //Destroy(WinMenu.gameObject);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //        //DontDestroyOnLoad(MainMenu.gameObject);
+    //        //DontDestroyOnLoad(GameMenu.gameObject);
+    //        //DontDestroyOnLoad(LoseMenu.gameObject);
+    //        //DontDestroyOnLoad(WinMenu.gameObject);
+    //    }
+    //}
 
     private void GameManager_onGameStateChanged(GameStates GameState)
     {
@@ -62,8 +74,8 @@ public class MenuManager : MonoBehaviour
     private void StartGame()
     {
         Debug.Log("Menu Manager start game");
-        MainMenu.SetActive(false);
-        GameMenu.SetActive(true);
+        MainMenu.gameObject.SetActive(false);
+        GameMenu.gameObject.SetActive(true);
 
         //CameraMainMenu.SetActive(false);
     }
@@ -73,27 +85,26 @@ public class MenuManager : MonoBehaviour
         //MainMenu.SetActive(false);
         //CameraEndGame.SetActive(true);
 
-     
+
     }
 
     private void RestartGame()
     {
-        Debug.Log(" burada");
-
-        MainMenu.SetActive(true);
-        GameMenu.SetActive(false);
+        LoseMenu.gameObject.SetActive(false);
+        MainMenu.gameObject.SetActive(true);
+        GameMenu.gameObject.SetActive(false);
     }
 
     private void LoseGameMenu()
     {
-        LoseMenu.SetActive(true);
-        GameMenu.SetActive(false);
+        LoseMenu.gameObject.SetActive(true);
+        GameMenu.gameObject.SetActive(false);
     }
 
     private void WinGameMenu()
     {
-        WinMenu.SetActive(true);
-        GameMenu.SetActive(false);
+        WinMenu.gameObject.SetActive(true);
+        GameMenu.gameObject.SetActive(false);
     }
 
 }
