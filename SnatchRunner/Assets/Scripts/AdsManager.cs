@@ -91,7 +91,7 @@ public class AdsManager : MonoBehaviour
         BannerAdView.OnAdClosedEvent += OnBannerAdClosedEvent;
 
         // Load banner ads, the banner ad will be displayed automatically after loaded
-        //BannerAdView.LoadAd();
+        BannerAdView.LoadAd();
     }
     private void DestroyBanner()
     {
