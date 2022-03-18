@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,18 +61,22 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        EditorSceneManager.LoadScene(EditorSceneManager.GetActiveScene().buildIndex, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex, UnityEngine.SceneManagement.LoadSceneMode.Single);
         updateGameState(GameStates.RestartGame);
     }
 
     public void NextLevel()
     {
-        EditorSceneManager.LoadScene("SampleScene2", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene2", UnityEngine.SceneManagement.LoadSceneMode.Single);
         updateGameState(GameStates.NextLevel);
     }
 
     public void ScoreUp()
     {
         updateGameState(GameStates.ScoreUp);
+    }
+    public void AdsContinue()
+    {
+        updateGameState(gameState);
     }
 }

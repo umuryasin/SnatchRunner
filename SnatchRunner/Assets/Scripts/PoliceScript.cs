@@ -8,14 +8,14 @@ public class PoliceScript : MonoBehaviour
     [SerializeField] private GameObject ColliderObject;
     [SerializeField] private GameObject SkorObject;
     [SerializeField] private Transform rotationRoot;
-    [SerializeField] private float forwardMovementSpeed = 1f;
-    [SerializeField] private float VelocityNoise = 2f;
+    [SerializeField] public float forwardMovementSpeed = 4f;
+    [SerializeField] public float VelocityNoise = 2f;
     [SerializeField] private float WaitTime = 1f;
     [SerializeField] private Transform targetTransform;
-    [SerializeField] private float targetDistanceX = 3;
+    [SerializeField] private float targetDistanceX = 1;
     [SerializeField] private float targetDistanceZ = 0;
     [SerializeField] private float P = 0.5f;
-    [SerializeField] private float I = 0.01f;
+    [SerializeField] private float I = 0.1f;
     [SerializeField] private Animator AnimationControl;
 
     private bool ActivateCatch = true;

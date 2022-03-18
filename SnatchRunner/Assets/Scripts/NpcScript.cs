@@ -10,14 +10,14 @@ public class NpcScript : MonoBehaviour
     [SerializeField] private GameObject NakedObject;
     [SerializeField] private GameObject SkorObject;
     [SerializeField] private Transform rotationRoot;
-    [SerializeField] private float forwardMovementSpeed = 1f;
-    [SerializeField] private float VelocityNoise = 2f;
+    [SerializeField] public float forwardMovementSpeed = 5f;
+    [SerializeField] public float VelocityNoise = 2f;
     [SerializeField] private float WaitTime = 1f;
     [SerializeField] private Transform targetTransform;
-    [SerializeField] private float targetDistanceX = 3;
+    [SerializeField] private float targetDistanceX = 1;
     [SerializeField] private float targetDistanceZ = 0;
-    [SerializeField] private float P = 0.5f;
-    [SerializeField] private float I = 0.01f;
+    [SerializeField] private float P = 0.8f;
+    [SerializeField] private float I = 0.2f;
 
     private bool isFollowOrNot = false;
     private bool isFollowWithPIDActive = false;
@@ -207,7 +207,7 @@ public class NpcScript : MonoBehaviour
         bool isFollowActivate = false;
         rigidbody.velocity = new Vector3(0, 0, 0);
 
-        if (randVal > 0.5)
+        if (randVal > 0.8)
         {
             NakedAnimator.SetBool("isTerrield", true);
         }

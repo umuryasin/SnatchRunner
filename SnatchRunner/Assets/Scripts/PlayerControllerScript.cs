@@ -6,14 +6,14 @@ using DG.Tweening;
 public class PlayerControllerScript : MonoBehaviour
 {
 
-    [SerializeField] private Transform sideMovementRoot;
-    [SerializeField] private Transform leftLimit, RightLimit;
-    [SerializeField] private GameObject PlayerObject;
-    [SerializeField] private float forwardMovementSpeed = 1f;   
-    [SerializeField] private float sideMovementSensivity = 0.1f;
-    [SerializeField] private float LookAtMovementSensivity = 10f;
-    [SerializeField] private float LookAtMovementRotationLimit = 60;
-    [SerializeField] private float LookAtMovementRotationSpeed = 0.85f;
+    [SerializeField] public Transform sideMovementRoot;
+    [SerializeField] public Transform leftLimit, RightLimit;
+    [SerializeField] public GameObject PlayerObject;
+    [SerializeField] public float forwardMovementSpeed = 1f;   
+    [SerializeField] public float sideMovementSensivity = 0.03f;
+    [SerializeField] public float LookAtMovementSensivity = 10f;
+    [SerializeField] public float LookAtMovementRotationLimit = 60;
+    [SerializeField] public float LookAtMovementRotationSpeed = 0.85f;
 
     private Vector2 inputDrag;
     private Vector2 inputpreviousMousePosition;

@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Canvas GameMenu;
     [SerializeField] private Canvas LoseMenu;
     [SerializeField] private Canvas WinMenu;
+    [SerializeField] private Canvas AdsMenu;
 
     [SerializeField] private TextMeshProUGUI txtScoreGame;
     [SerializeField] private TextMeshProUGUI txtScoreLose;
@@ -20,15 +21,22 @@ public class MenuManager : MonoBehaviour
     //private static MenuManager instance;
     //public static MenuManager Instance => instance ?? (instance = FindObjectOfType<MenuManager>());
 
+    public delegate void MenuManagerDelegate();
+    public static event MenuManagerDelegate OnMenuLoaded;
+
     void OnEnable()
     {
         // Subscribe to the event
         GameManager.onGameStateChanged += GameManager_onGameStateChanged;
+        InputManager.OnShowAds += InputManager_OnShowAds;
     }
+
+    
 
     void OnDisable()
     {
         // Unsubscribe to the event
+        InputManager.OnShowAds -= InputManager_OnShowAds;
         GameManager.onGameStateChanged -= GameManager_onGameStateChanged;
     }
 
@@ -37,6 +45,8 @@ public class MenuManager : MonoBehaviour
         if (GameState == GameStates.Started)
         {
             StartGame();
+            AdsMenu.gameObject.SetActive(true);
+            OnMenuLoaded?.Invoke();
         }
         else if (GameState == GameStates.EndGameFinished)
         {
@@ -62,14 +72,20 @@ public class MenuManager : MonoBehaviour
             txtScoreWin.text = score.ToString();
             txtScoreLose.text = score.ToString();
         }
-    }
+        //else if(GameState==GameStates.ShowInterAds)
+        //    AdsMenu.gameObject.SetActive(true);
 
+    }
+    private void InputManager_OnShowAds()
+    {
+        ShowAdsCanvas();
+    }
     private void StartGame()
     {
         Debug.Log("Menu Manager start game");
         MainMenu.gameObject.SetActive(false);
         GameMenu.gameObject.SetActive(true);
-
+        LoseMenu.gameObject.SetActive(false);
         //CameraMainMenu.SetActive(false);
     }
 
@@ -92,11 +108,20 @@ public class MenuManager : MonoBehaviour
     {
         LoseMenu.gameObject.SetActive(true);
         GameMenu.gameObject.SetActive(false);
+        MainMenu.gameObject.SetActive(false);
     }
 
     private void WinGameMenu()
     {
         WinMenu.gameObject.SetActive(true);
+        GameMenu.gameObject.SetActive(false);
+        MainMenu.gameObject.SetActive(false);
+
+    }
+    private void ShowAdsCanvas()
+    {
+        LoseMenu.gameObject.SetActive(false);
+        MainMenu.gameObject.SetActive(false);
         GameMenu.gameObject.SetActive(false);
     }
 

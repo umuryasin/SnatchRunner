@@ -4,7 +4,23 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public delegate void InputManagerDelegate();
+    public static event InputManagerDelegate OnShowAds;
 
+    private void OnEnable()
+    {
+        AdsManager.OnInterstitialClosed += OnInterstitialClosed;
+        AdsManager.OnRewardedClosed += OnInterstitialClosed;
+    }
+    private void OnDisable()
+    {
+        AdsManager.OnInterstitialClosed -= OnInterstitialClosed;
+        AdsManager.OnRewardedClosed -= OnInterstitialClosed;
+    }
+    private void OnInterstitialClosed()
+    {
+        GameManager.Instance.RestartGame();
+    }
     public void StartGame()
     {
         Debug.Log("starttttt");
@@ -13,11 +29,12 @@ public class InputManager : MonoBehaviour
 
     public void ResetGame()
     {
-        GameManager.Instance.RestartGame();
+        OnShowAds?.Invoke();
     }
 
     public void NextLevel()
     {
+
         Debug.Log(" input next level");
         GameManager.Instance.NextLevel();
     }

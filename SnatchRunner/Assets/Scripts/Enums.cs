@@ -15,4 +15,6 @@ public enum GameStates
     LoseGame,
     WinGame,
     NextLevel,
+    ShowInterAds,
+    ShowRewardedAds,
 };
