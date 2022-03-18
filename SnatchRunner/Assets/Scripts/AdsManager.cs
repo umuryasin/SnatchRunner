@@ -13,26 +13,12 @@ public class AdsManager : MonoBehaviour
     public static AdsDelegate OnInterstitialClosed;
     public static AdsDelegate OnRewardedClosed;
 
-    private static AdsManager instance;
-    public static AdsManager Instance => instance ?? (instance = FindObjectOfType<AdsManager>());
-
     private Yodo1U3dBannerAdView BannerAdView;
     private bool IsAdsInitialized = false;
     private bool isInterstitialInitialized = false;
     private bool isRewardedAdInitialized = false;
 
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +35,18 @@ public class AdsManager : MonoBehaviour
     {
         MenuManager.OnMenuLoaded += MenuManager_OnMenuLoaded;
         InputManager.OnShowAds += InputManager_OnShowAds;
+        GameManager.onGameStateChanged += GameManager_onGameStateChanged;
+        InitializeAds();
+
+    }
+    private void OnDisable()
+    {
+        MenuManager.OnMenuLoaded -= MenuManager_OnMenuLoaded;
+        InputManager.OnShowAds -= InputManager_OnShowAds;
+        GameManager.onGameStateChanged -= GameManager_onGameStateChanged;
+    }
+    private void GameManager_onGameStateChanged(GameStates obj)
+    {
 
     }
 
@@ -62,11 +60,7 @@ public class AdsManager : MonoBehaviour
         RequestBanner();
     }
 
-    private void OnDisable()
-    {
-        MenuManager.OnMenuLoaded -= MenuManager_OnMenuLoaded;
-        InputManager.OnShowAds -= InputManager_OnShowAds;
-    }
+
 
 
     private void InitializeAds()
@@ -97,7 +91,7 @@ public class AdsManager : MonoBehaviour
         BannerAdView.OnAdClosedEvent += OnBannerAdClosedEvent;
 
         // Load banner ads, the banner ad will be displayed automatically after loaded
-        BannerAdView.LoadAd();
+        //BannerAdView.LoadAd();
     }
     private void DestroyBanner()
     {
@@ -167,6 +161,7 @@ public class AdsManager : MonoBehaviour
     private void OnInterstitialAdClosedEvent()
     {
         Debug.Log(DateTime.Now + " :doesluck [Yodo1 Mas] Interstitial ad closed");
+        Debug.Log("ads restart game");
         GameManager.Instance.RestartGame();
 
     }

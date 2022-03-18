@@ -557,8 +557,11 @@ public class Yodo1EditorAds : MonoBehaviour
         {
             DisableGUI = false;
             InterstitialSampleAdEditor.SetActive(false);
+            Debug.Log("inter close event: InterstitialSampleAdEditor");
             Yodo1U3dMasCallback.ForwardEvent("onInterstitialAdClosedEvent");
         }
+        else
+            Debug.Log("cant catch inter close event: InterstitialSampleAdEditor=null");
     }
     public static void CloseRewardedVideodsInEditor()
     {

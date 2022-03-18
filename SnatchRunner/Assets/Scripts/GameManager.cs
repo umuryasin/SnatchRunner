@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameStates> onGameStateChanged;
 
+
     // Start is called before the first frame update
     void Awake()
     {

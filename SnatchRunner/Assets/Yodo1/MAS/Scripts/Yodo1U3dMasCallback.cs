@@ -540,6 +540,8 @@ namespace Yodo1.MAS
             else if (string.Equals(val, "onInterstitialAdClosedEvent"))
             {
                 Yodo1U3dMasCallback.Instance.UnPause();
+                Debug.Log("mas event :onInterstitialAdClosedEvent ");
+
                 InvokeEvent(_onInterstitialAdClosedEvent);
             }
             else if (string.Equals(val, "onBannerAdOpenedEvent"))
