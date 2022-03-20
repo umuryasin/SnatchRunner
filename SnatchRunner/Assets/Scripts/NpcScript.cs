@@ -175,8 +175,8 @@ public class NpcScript : MonoBehaviour
         sumErrX = Mathf.Clamp(sumErrX, -MaxVelX, MaxVelX);
         sumErrZ = Mathf.Clamp(sumErrZ, -MaxVelZ, MaxVelZ);
 
-        velX += (Random.value - 0.5f) * VelocityNoise;
-        velZ += (Random.value - 0.5f) * VelocityNoise;
+        velX += Mathf.Max((Random.value - 0.5f) * VelocityNoise,0);
+        velZ += Mathf.Max((Random.value - 0.5f) * VelocityNoise,0);
 
         rigidbody.velocity = new Vector3(velX, 0, velZ);
     }

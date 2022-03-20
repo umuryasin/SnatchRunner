@@ -125,6 +125,7 @@ public class PlayerControllerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("tag: "+other.transform.root.tag);
         if (other.transform.root.CompareTag("Obstacle"))
         {
             Debug.Log("Ouch!! I fall down");

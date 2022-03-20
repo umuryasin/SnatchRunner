@@ -193,8 +193,8 @@ public class PoliceScript : MonoBehaviour
         //if (sumErrZ <= -MaxVelZ)
         //    sumErrZ = -MaxVelZ;
 
-        velX += (Random.value - 0.5f) * VelocityNoise;
-        velZ += (Random.value - 0.5f) * VelocityNoise;
+        velX += Mathf.Max((Random.value - 0.5f) * VelocityNoise, 0);
+        velZ += Mathf.Max((Random.value - 0.5f) * VelocityNoise, 0);
 
         rigidbody.velocity = new Vector3(velX, 0, velZ);
 

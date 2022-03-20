@@ -7,10 +7,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance => instance ?? (instance = FindObjectOfType<GameManager>());
+    public int LevelCount = 5;
 
     private GameStates gameState;
 
     public static event Action<GameStates> onGameStateChanged;
+
+    private int Level = 1;
 
 
     // Start is called before the first frame update
@@ -68,7 +71,10 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene2", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        Level++;
+        if (Level > LevelCount)
+            Level = LevelCount;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene"+ Level, UnityEngine.SceneManagement.LoadSceneMode.Single);
         updateGameState(GameStates.NextLevel);
     }
 

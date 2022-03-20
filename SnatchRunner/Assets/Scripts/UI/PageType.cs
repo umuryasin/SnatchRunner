@@ -7,7 +7,6 @@
             Menu,
             GameOver,
             GameWin,
-            GamePlay,
         }
     }
 }

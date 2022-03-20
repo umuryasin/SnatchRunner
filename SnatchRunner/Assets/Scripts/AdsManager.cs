@@ -12,13 +12,14 @@ public class AdsManager : MonoBehaviour
     public static AdsDelegate OnRewardedAdWatched;
     public static AdsDelegate OnInterstitialClosed;
     public static AdsDelegate OnRewardedClosed;
+    public int InterstitialAdShowRatio = 3;
 
     private Yodo1U3dBannerAdView BannerAdView;
     private bool IsAdsInitialized = false;
     private bool isInterstitialInitialized = false;
     private bool isRewardedAdInitialized = false;
 
- 
+    private int InterstitialAdsShowCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +53,14 @@ public class AdsManager : MonoBehaviour
 
     private void InputManager_OnShowAds()
     {
-        ShowInterstitialAd();
+        InterstitialAdsShowCounter++;
+        if(InterstitialAdsShowCounter>=InterstitialAdShowRatio)
+        {
+            InterstitialAdsShowCounter = 0;
+            ShowInterstitialAd();
+        }
+        else
+            OnInterstitialClosed?.Invoke();
     }
 
     private void MenuManager_OnMenuLoaded()

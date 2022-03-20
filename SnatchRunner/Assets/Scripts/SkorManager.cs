@@ -40,7 +40,7 @@ public class SkorManager : MonoBehaviour
 
     private void GameManager_onGameStateChanged(GameStates GameState)
     {
-        if (GameState == GameStates.NextLevel)
+        if (GameState == GameStates.NextLevel || GameState==GameStates.RestartGame)
         {
             ResetScore();
         }

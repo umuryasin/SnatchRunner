@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     public delegate void InputManagerDelegate();
     public static event InputManagerDelegate OnShowAds;
 
+
     private void OnEnable()
     {
         AdsManager.OnInterstitialClosed += OnInterstitialClosed;
