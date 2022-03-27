@@ -13,12 +13,12 @@ public class PoliceScript : MonoBehaviour
     [SerializeField] private float WaitTime = 1f;
     [SerializeField] private Transform targetTransform;
     [SerializeField] private float targetDistanceX = 1;
-    [SerializeField] private float targetDistanceZ = 0;
+    private float targetDistanceZ = 5;
     [SerializeField] private float P = 0.5f;
     [SerializeField] private float I = 0.1f;
     [SerializeField] private Animator AnimationControl;
 
-    private bool ActivateCatch = true;
+    private bool ActivateCatch = false;
     private bool isFollowWithPIDActive = false;
     private bool isLookAtActive = false;
     private Rigidbody rigidbody;
@@ -30,12 +30,14 @@ public class PoliceScript : MonoBehaviour
     {
         // Subscribe to the event
         GameManager.onGameStateChanged += GameManager_onGameStateChanged;
+        PlayerControllerScript.OnSnatch += PlayerControllerScript_OnSnatch;
     }
 
     void OnDisable()
     {
         // Unsubscribe to the event
         GameManager.onGameStateChanged -= GameManager_onGameStateChanged;
+        PlayerControllerScript.OnSnatch -= PlayerControllerScript_OnSnatch;
     }
 
     // Start is called before the first frame update
@@ -64,14 +66,10 @@ public class PoliceScript : MonoBehaviour
             LookAtTheTarget(targetTransform);
         }
 
+       
         if (ActivateCatch)
         {
-            float distance = Vector3.Distance(this.transform.position, targetTransform.position);
-
-            if (distance < targetDistanceZ * 2)
-            {
-                Snatch();
-            }
+            Snatch();
         }
     }
 
@@ -113,7 +111,12 @@ public class PoliceScript : MonoBehaviour
             StopCharacter();
         }
     }
-
+    private void PlayerControllerScript_OnSnatch()
+    {
+        float distance = Vector3.Distance(this.transform.position, targetTransform.position);
+        if (distance < targetDistanceZ * 2)
+            ActivateCatch = true;
+    }
     private void Snatch()
     {
         if (!isObjectSnatched)

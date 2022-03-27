@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   androidSettings:
     AppKey: txeAub0xTv
-    AdmobAppID: ca-app-pub-5580537606944457~4465578836
-    BundleID: 
+    AdmobAppID: ca-app-pub-5333220833779174~6299528898
+    BundleID: com.BuggyCompany.SnatchRunner
     GooglePlayStore: 1
     ChineseAndroidStores: 0
     Channel: 

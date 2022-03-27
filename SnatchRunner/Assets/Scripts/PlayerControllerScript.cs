@@ -15,6 +15,9 @@ public class PlayerControllerScript : MonoBehaviour
     [SerializeField] public float LookAtMovementRotationLimit = 60;
     [SerializeField] public float LookAtMovementRotationSpeed = 0.85f;
 
+    public delegate void PlayerDelegate();
+    public static event PlayerDelegate OnSnatch;
+
     private Vector2 inputDrag;
     private Vector2 inputpreviousMousePosition;
 
@@ -133,6 +136,7 @@ public class PlayerControllerScript : MonoBehaviour
         }
         else if (other.transform.root.CompareTag("Npc"))
         {
+            OnSnatch?.Invoke();
             Debug.Log("He he, Snatch!!");
         }
         else if (other.transform.root.CompareTag("Police"))

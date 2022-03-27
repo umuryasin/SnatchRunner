@@ -22,6 +22,7 @@ public class NpcScript : MonoBehaviour
     private bool isFollowOrNot = false;
     private bool isFollowWithPIDActive = false;
     private bool isLookAtActive = false;
+    private bool isOppositeWalking = false;
     private Rigidbody rigidbody;
 
     private Animator NormalAnimator;
@@ -189,15 +190,19 @@ public class NpcScript : MonoBehaviour
     private void ActivateStartAnimation()
     {
         float randVal = Random.value;
-
-        if (randVal > 0.5)
+        float randvalDirection = Random.value;
+        int direction = 1;
+        if (randvalDirection < 0.4)
+            direction = -1;
+        if (randVal > 0.7)
         {
             NormalAnimator.SetBool("isTalkingOnPhone", true);
         }
         else
         {
             NormalAnimator.SetBool("isWalking", true);
-            rigidbody.velocity = new Vector3(0, 0, 1);
+            rigidbody.velocity = new Vector3(0, 0, direction*1);
+            rigidbody.transform.Rotate(0, 90 - direction * 90, 0);
         }
     }
 

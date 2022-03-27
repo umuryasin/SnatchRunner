@@ -47,9 +47,9 @@ public class SkorManager : MonoBehaviour
        
     }
 
-    public void ScoreUp()
+    public void ScoreUp(int score=1)
     {
-        Score++;
+        Score+= score;
       
         GameManager.Instance.ScoreUp();
     }
